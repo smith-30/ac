@@ -1,5 +1,4 @@
 # ac
-Origin Of The Daemon
 
 ## Misc
 
