@@ -37,7 +37,7 @@ clean-dep:
 	GO111MODULE=on go mod tidy
 
 build:
-	GO111MODULE=on go build -v -ldflags "-X github.com/smith-30/ac/cmd.version=$(VERSION) -X github.com/smith-30/ac/cmd.revision=$(REVISION) -X github.com/smith-30/ac/cmd.appName=$(NAME)" -o build/${GOOS}_${GOARCH}/${NAME} main.go
+	GO111MODULE=on go build -v -ldflags "-X github.com/smith-30/acc/cmd.version=$(VERSION) -X github.com/smith-30/acc/cmd.revision=$(REVISION) -X github.com/smith-30/acc/cmd.appName=$(NAME)" -o build/${GOOS}_${GOARCH}/${NAME} main.go
 
 install:
 	go install .

@@ -15,6 +15,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -26,14 +27,8 @@ var atcoderCmd = &cobra.Command{
 	Short: "",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("start atcoder test %v", verInfo())
-
-		// for logging panic
-		defer func() {
-			if err := recover(); err != nil {
-				fmt.Printf("panic ... %#v\n", err)
-			}
-		}()
+		fmt.Printf("start atcoder test %v\n", verInfo())
+		panic(errors.New("test"))
 	},
 }
 

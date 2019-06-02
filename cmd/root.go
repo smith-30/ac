@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/smith-30/acc/color"
 	"github.com/spf13/cobra"
 )
 
 var (
+	// this var is setting by Makefile
 	appName = ""
 )
 
@@ -21,8 +23,14 @@ var rootCmd = &cobra.Command{
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	// for logging panic
+	defer func() {
+		if err := recover(); err != nil {
+			mes := fmt.Sprintf("sorry unexpected error is occurred. please report to the repository. err: %s\n", err)
+			fmt.Printf(color.Red(mes))
+		}
+	}()
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
 		os.Exit(1)
 	}
 }
