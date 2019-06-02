@@ -23,6 +23,7 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: make build
+      - run: go get github.com/spf13/cobra
       - run: go get github.com/alecthomas/gometalinter
       - run: go get github.com/tsenart/deadcode
       - run: go get github.com/gordonklaus/ineffassign
