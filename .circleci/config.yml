@@ -22,4 +22,10 @@ jobs:
       - checkout
 
       # specify any bash command here prefixed with `run: `
+      - go get github.com/alecthomas/gometalinter
+      - go get github.com/tsenart/deadcode
+      - go get github.com/gordonklaus/ineffassign
+      - go get github.com/opennota/check/cmd/structcheck
+      - go get github.com/opennota/check/cmd/varcheck
+      - gometalinter ./... --vendor --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
       - run: make build
