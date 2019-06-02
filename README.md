@@ -1,6 +1,6 @@
 # acc
 
-`a`ll `c`lear `c`heck
+**a**ll **c**lear **c**heck
 
 ## Install
 
