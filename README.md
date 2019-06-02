@@ -5,13 +5,13 @@
 ## Install
 
 ```
-$ go get -u github.com/smith-30/ac
+$ go get -u github.com/smith-30/acc
 ```
 
 ## Misc
 
 **add command**
 
-```
+```9mm
 $ cobra add <your order>
 ```
