@@ -3,7 +3,9 @@ package cmd
 import (
 	"fmt"
 	"io"
+	"math"
 	"os/exec"
+	"strconv"
 	"strings"
 
 	"github.com/smith-30/acc/color"
@@ -46,18 +48,31 @@ var atcoderCmd = &cobra.Command{
 			io.WriteString(stdin, item.Content)
 			stdin.Close()
 			out, err := cmd.CombinedOutput()
+			outstr := string(out)
 
 			fmt.Printf("Case [%d] exp: %s", idx, item.Exp)
 			if err != nil {
-				fmt.Println(color.Redf("\texecute error: %s because %s", err, string(out)))
+				fmt.Println(color.Redf("\texecute error: %s because %s", err, outstr))
 				continue
 			}
-			if string(out) == item.Exp {
-				fmt.Println("\t" + color.Green("ok!"))
+			var ok bool
+			outv, err := strconv.ParseFloat(strings.TrimSuffix(outstr, "\n"), 64)
+			if err == nil {
+				expv, _ := strconv.ParseFloat(strings.TrimSuffix(item.Exp, "\n"), 64)
+				if math.Abs(outv-expv) < 0.000000001 {
+					ok = true
+				}
 			} else {
+				if outstr == item.Exp {
+					ok = true
+				}
+			}
+			if !ok {
 				fmt.Println(color.Red("\terror"))
-				fmt.Println(fmt.Sprintf("\t\tyour answer is %s", string(out)))
-				fmt.Printf("\targument\n\t\t%s\n", item.Content)
+				fmt.Println(fmt.Sprintf("\t\tyour answer is %s", outstr))
+				fmt.Printf("\targument\n%s\n", item.Content)
+			} else {
+				fmt.Println("\t" + color.Green("ok!"))
 			}
 		}
 	},
