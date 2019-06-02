@@ -26,7 +26,7 @@ func Execute() {
 	// for logging panic
 	defer func() {
 		if err := recover(); err != nil {
-			fmt.Printf(color.Redf("sorry unexpected error is occurred. please report to the repository. err: %s\n", err))
+			fmt.Println(color.Redf("sorry unexpected error is occurred. please report to the repository. err: %s", err))
 		}
 	}()
 	if err := rootCmd.Execute(); err != nil {
