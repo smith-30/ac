@@ -1,4 +1,4 @@
-module github.com/smith-30/ac
+module github.com/smith-30/acc
 
 go 1.12
 

@@ -18,7 +18,7 @@ RESET=\033[0m
 COLORIZE_PASS=sed ''/PASS/s//$$(printf "$(GREEN)PASS$(RESET)")/''
 COLORIZE_FAIL=sed ''/FAIL/s//$$(printf "$(RED)FAIL$(RESET)")/''
 
-NAME=ac
+NAME=acc
 
 .PHONY: \
 	runner-test \
@@ -40,4 +40,4 @@ build:
 	GO111MODULE=on go build -v -ldflags "-X github.com/smith-30/ac/cmd.version=$(VERSION) -X github.com/smith-30/ac/cmd.revision=$(REVISION) -X github.com/smith-30/ac/cmd.appName=$(NAME)" -o build/${GOOS}_${GOARCH}/${NAME} main.go
 
 install:
-	go install ./cmd/${CMD}
+	go install .
