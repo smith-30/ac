@@ -8,10 +8,14 @@
 $ go get -u github.com/smith-30/acc
 ```
 
-## Misc
+## Contribution
 
-**add command**
+### Add other contest
 
-```9mm
-$ cobra add <your order>
+clone this repository and add command.
+
+```bash
+$ cobra add <contest> # ex. aoj 
 ```
+
+write the logic as `contest.go` is created in the cmd directory.
