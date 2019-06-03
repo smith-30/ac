@@ -30,3 +30,4 @@ jobs:
       - run: go get github.com/opennota/check/cmd/structcheck
       - run: go get github.com/opennota/check/cmd/varcheck
       - run: gometalinter ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
+      - run: make test

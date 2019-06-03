@@ -25,10 +25,14 @@ NAME=acc
 	install \
 	build \
 	runner \
-	dep-clean
+	dep-clean \
+	test
 
 runner-test:
 	GO111MODULE=on go test -v ./... | $(COLORIZE_PASS) | $(COLORIZE_FAIL)
+
+test: 
+	GO111MODULE=on go test ./...
 
 runner:
 	realize start
