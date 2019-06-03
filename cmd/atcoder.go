@@ -14,6 +14,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	tab = "\t"
+)
+
 var (
 	url     = ""
 	execCmd = ""
@@ -52,7 +56,7 @@ var atcoderCmd = &cobra.Command{
 
 			fmt.Printf("Case [%d] exp: %s", idx, item.Exp)
 			if err != nil {
-				fmt.Println(color.Redf("\texecute error: %s because %s", err, outstr))
+				fmt.Println(color.Redf(tab+"execute error: %s because %s", err, outstr))
 				continue
 			}
 			var ok bool
@@ -68,11 +72,11 @@ var atcoderCmd = &cobra.Command{
 				}
 			}
 			if !ok {
-				fmt.Println(color.Red("\terror"))
-				fmt.Println(fmt.Sprintf("\t\tyour answer is %s", outstr))
-				fmt.Printf("\targument\n%s\n", item.Content)
+				fmt.Println(color.Red(tab + "error"))
+				fmt.Println(fmt.Sprintf(tab+tab+"your answer is %s", outstr))
+				fmt.Printf(tab+"argument\n%s\n", item.Content)
 			} else {
-				fmt.Println("\t" + color.Green("ok!"))
+				fmt.Println(tab + color.Green("ok!"))
 			}
 		}
 	},
