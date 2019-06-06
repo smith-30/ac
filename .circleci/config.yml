@@ -20,11 +20,16 @@ jobs:
     working_directory: /go/src/github.com/smith-30/acc
     steps:
       - checkout
+      - restore_cache:
+          name: Restore go modules cache
+          keys:
+              - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
+      - run:
+          name: Vendoring
+          command: go mod download
 
       # specify any bash command here prefixed with `run: `
       - run: make build
-      - run: go get github.com/spf13/cobra
-      - run: go get github.com/PuerkitoBio/goquery
       - run: go get github.com/alecthomas/gometalinter
       - run: go get github.com/tsenart/deadcode
       - run: go get github.com/gordonklaus/ineffassign
@@ -32,3 +37,9 @@ jobs:
       - run: go get github.com/opennota/check/cmd/varcheck
       - run: gometalinter ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
       - run: make test
+
+      - save_cache:
+          name: Save go modules cache
+          key: v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
+          paths:
+              - /go/pkg/mod/cache
