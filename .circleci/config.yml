@@ -27,13 +27,8 @@ jobs:
           keys:
               - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
       # specify any bash command here prefixed with `run: `
+      - run: go vet ./...
       - run: make build
-      - run: GO111MODULE=auto go get github.com/alecthomas/gometalinter
-      - run: GO111MODULE=auto go get github.com/tsenart/deadcode
-      - run: GO111MODULE=auto go get github.com/gordonklaus/ineffassign
-      - run: GO111MODULE=auto go get github.com/opennota/check/cmd/structcheck
-      - run: GO111MODULE=auto go get github.com/opennota/check/cmd/varcheck
-      - run: gometalinter ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
       - run: make test
       - save_cache:
           name: Save go modules cache
