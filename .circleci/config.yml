@@ -28,7 +28,7 @@ jobs:
       - run: curl -L https://git.io/vp6lP | sh -s -- -b ./bin
       - run: mv ./bin/* $GOPATH/bin
       # specify any bash command here prefixed with `run: `
-      - run: GO111MODULE=off gometalinter ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
+      - run: GO111MODULE=off gometalinter --vendor ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
       - run: make build
       - run: make test
       - save_cache:
