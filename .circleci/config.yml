@@ -26,10 +26,6 @@ jobs:
           name: Restore go modules cache
           keys:
               - v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
-      - run:
-          name: Vendoring
-          command: go mod download
-
       # specify any bash command here prefixed with `run: `
       - run: make build
       - run: GO111MODULE=auto go get github.com/alecthomas/gometalinter
@@ -37,10 +33,10 @@ jobs:
       - run: go get github.com/gordonklaus/ineffassign
       - run: go get github.com/opennota/check/cmd/structcheck
       - run: go get github.com/opennota/check/cmd/varcheck
+      - run: gometalinter ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
+      - run: make test
       - save_cache:
           name: Save go modules cache
           key: v1-mod-{{ .Branch }}-{{ checksum "go.mod" }}
           paths:
               - /go/pkg/mod/cache
-      - run: gometalinter ./... --disable-all --enable=varcheck --enable=deadcode --enable=vet --enable=ineffassign --enable=structcheck
-      - run: make test
