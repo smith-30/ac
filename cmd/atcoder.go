@@ -8,9 +8,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/smith-30/acc/color"
+	"github.com/recoilme/pudge"
 	"github.com/smith-30/acc/domain"
 	"github.com/smith-30/acc/infra/client"
+	"github.com/smith-30/color"
 	"github.com/spf13/cobra"
 )
 
@@ -36,6 +37,9 @@ var atcoderCmd = &cobra.Command{
 			fmt.Printf("can't create client")
 			return
 		}
+
+		// cache db
+		defer pudge.CloseAll()
 
 		// test case 取得
 		cs, err := c.GetTestCase(url)

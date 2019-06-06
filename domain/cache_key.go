@@ -21,3 +21,7 @@ func NewCacheKey(ru string) (*CacheKey, error) {
 func (a *CacheKey) Key() Key {
 	return Key(a.URL.Hostname() + a.URL.Path)
 }
+
+func (a *CacheKey) RequestDest() string {
+	return a.URL.String()
+}

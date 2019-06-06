@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/smith-30/acc/color"
+	"github.com/smith-30/color"
 	"github.com/spf13/cobra"
 )
 
