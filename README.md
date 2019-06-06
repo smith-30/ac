@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/smith-30/acc/badge.svg?branch=master)](https://coveralls.io/github/smith-30/acc?branch=master)
 [![GoDoc](https://godoc.org/github.com/smith-30/acc?status.svg)](https://godoc.org/github.com/smith-30/acc)
 [![license](https://img.shields.io/badge/license-MIT-4183c4.svg)](https://github.com/smith-30/acc/blob/master/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/smith-30/acc)](https://goreportcard.com/report/github.com/smith-30/acc)
 
 **a**ll **c**lear **c**heck
 
