@@ -5,7 +5,8 @@ type HttpClient interface {
 }
 
 type HttpResponseRepository interface {
-	Get(k Key) *HttpResponse
+	Get(k Key, value interface{}) (*HttpResponse, error)
+	Save(k Key, value interface{}) error 
 }
 
 type HttpResponse struct {

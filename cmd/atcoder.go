@@ -10,7 +10,9 @@ import (
 
 	"github.com/recoilme/pudge"
 	"github.com/smith-30/acc/domain"
-	"github.com/smith-30/acc/infra/client"
+	"github.com/smith-30/acc/infra/api/http"
+	"github.com/smith-30/acc/infra/cache"
+	"github.com/smith-30/acc/usecase/atcoder"
 	"github.com/smith-30/color"
 	"github.com/spf13/cobra"
 )
@@ -32,17 +34,25 @@ var atcoderCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("start atcoder test %v\n\n", verInfo())
 
-		c := client.NewClient(domain.Atcoder)
-		if c == nil {
-			fmt.Printf("can't create client")
+		repo, err := cache.NewCacheRepo()
+		if err != nil {
+			fmt.Printf("%v", err)
 			return
 		}
 
 		// cache db
 		defer pudge.CloseAll()
 
+		uc := atcoder.NewUsecase(repo, http.NewHttpClient())
+
 		// test case 取得
-		cs, err := c.GetTestCase(url)
+		ck, err := domain.NewCacheKey(url)
+		if err != nil {
+			fmt.Printf("%v", err)
+			return
+		}
+		ucmd := atcoder.Command{ck}
+		cs, err := uc.Exec(ucmd)
 		if err != nil {
 			fmt.Printf("%v", err)
 			return

@@ -4,6 +4,10 @@ import "net/url"
 
 type Key string
 
+func (a Key) String() string {
+	return string(a)
+}
+
 type CacheKey struct {
 	URL *url.URL
 }

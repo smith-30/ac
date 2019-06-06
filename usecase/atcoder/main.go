@@ -28,16 +28,16 @@ func NewUsecase(r domain.HttpResponseRepository, hc domain.HttpClient) AtcoderUC
 }
 
 func (a *uc) Exec(c Command) ([]domain.TestCase, error) {
-	var r *domain.HttpResponse
 	// get cache by key
-	r = a.repo.Get(c.Key())
+	r, err := a.repo.Get(c.Key(), &domain.HttpResponse{})
+
 	// no cache
-	if r == nil {
+	if err != nil {
 		res, err := a.httpCli.Get(c.RequestDest())
 		if err != nil {
 			return nil, err
 		}
-		err = a.repo.Save(res)
+		err = a.repo.Save(c.Key(), res)
 		if err != nil {
 			return nil, err
 		}
@@ -45,21 +45,12 @@ func (a *uc) Exec(c Command) ([]domain.TestCase, error) {
 	}
 
 	// Request the HTML page.
-	// res, err := http.Get("http://metalsucks.net")
-	// if err != nil {
-	//   log.Fatal(err)
-	// }
-	// defer res.Body.Close()
-	// if res.StatusCode != 200 {
-	//   log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
-	// }
 	reader := bytes.NewBuffer(r.Body)
 	doc, err := goquery.NewDocumentFromReader(reader)
 	if err != nil {
 		return nil, err
 	}
 
-	// tcs := make([]domain.TestCase, 0, 10)
 	cache := map[string]string{}
 	contents := make([]string, 0, 5)
 	exps := make([]string, 0, 5)
