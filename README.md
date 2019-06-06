@@ -14,6 +14,28 @@
 $ go get -u github.com/smith-30/acc
 ```
 
+## Usage
+
+### atcoder
+
+```
+$ acc atcoder -u https://atcoder.jp/contests/<problem path> -c "go run path/to/main.go"
+```
+
+after above command, cache db is created at `$GOPATH/bin/acc.db`. this is to ensure that acc does not load the site.
+
+**example**
+
+```
+$ acc atcoder -u https://atcoder.jp/contests/abc119/tasks/abc119_b -c "go run ./main.go"
+start atcoder test v0.0.0-e0ce3ec (built with go1.12.1)
+
+Case [0] exp: 48000.0
+	ok!
+Case [1] exp: 138000000.0038
+	ok!
+```
+
 ## Contribution
 
 ### Add other contest
